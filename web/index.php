@@ -62,6 +62,10 @@ function show_content(optionsId) {
 			<h2>Home</h2>
 
 			<p>
+			Project by Gaston Besanson, Stefano Costantini, Laura Cozma, Jordi Zamora Munt
+			</p>			
+
+			<p>
 			Here you have to describe what your app is about. Use approximately 200 words to summarise what is the service you are providing.
 			Add links to external sources like <a href="http://www.wikipedia.org" target="_blank">Wikipedia</a> if needed.
 			</p>
