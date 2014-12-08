@@ -48,7 +48,7 @@ function show_content(optionsId) {
 }
 </script>
 <body>
-	<div id="header"><h1>MyApp</h1></div>
+	<div id="header"><h1>Product recommendation analysis</h1></div>
 
 	<div id="menu">
 		<a id="home_link" href="#" class="active" onclick="show_content('home'); return false;">Home</a> &middot;
@@ -62,10 +62,6 @@ function show_content(optionsId) {
 			<h2>Home</h2>
 
 			<p>
-			Project by Gaston Besanson, Stefano Costantini, Laura Cozma, Jordi Zamora Munt
-			</p>			
-
-			<p>
 			Here you have to describe what your app is about. Use approximately 200 words to summarise what is the service you are providing.
 			Add links to external sources like <a href="http://www.wikipedia.org" target="_blank">Wikipedia</a> if needed.
 			</p>
@@ -75,7 +71,7 @@ function show_content(optionsId) {
 	
 	</div>
 
-	<div id="footer">My App </div>
+	<div id="footer">Project team: Gaston Besanson, Stefano Costantini, Laura Cozma, Jordi Zamora Munt</div>
 
 </body>
 </html>
