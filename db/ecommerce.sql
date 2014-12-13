@@ -249,4 +249,6 @@ CREATE TABLE `analysis_prob` (
   `p`       float(5) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
+
 /*CREATE TABLE `analsys_analytics_estimates` ()*/

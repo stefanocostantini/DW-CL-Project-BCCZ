@@ -1,38 +1,31 @@
-
 library(RMySQL)
+library(arules)
 
+
+#Connection to SQL
 db = dbConnect(MySQL(), user='root', password='root', dbname='ecommerce', host='localhost')
 
-result = dbSendQuery(db, "SELECT * from analysis_data_table")
-
+#Query of Interest
+result = dbSendQuery(db, "select distinct(a.OrderID), b.ProductName , b.ProductID from order_details a join products b on a.ProductID = b.ProductID order by a.OrderID")
 data = fetch(result, n=-1)
 
-y <- data[,1]
-X <- as.matrix(data[,2:11])
+#Prepare data for arule fuction
+b<-split(data$ProductName, data$OrderID)
+c<-as(b, "transactions")
 
-logit <- glm( y ~ X , binomial(link='logit') )
+#Finding rules
+rules<-apriori(c, parameter=list(supp=0.002, conf=0.8))
+inspect(rules)
 
-summary( logit )
+# Turning output into Data.Frame
+d<-as(rules, "data.frame")
+output<-as.character(d[,1])
 
-table <- summary(logit)$coefficients
 
-for( i in 1:10 ){
-  query <- sprintf('INSERT INTO analysis_estimates VALUES (\'coef%s\',%f,%f,%f,%f);',i,table[i,1],table[i,2],table[i,3],table[i,4])
-  query = dbSendQuery(db, query )
-}
+out<-as.data.frame(d[,1])
+colnames(out)<-"Rules"
 
-#
-inv.link <- function(eta){ exp(eta)/(1+exp(eta))}
-beta     <- coef(logit)
-c=3
-x <- seq(min(X[,c]),max(X[,c]),0.01)
-p <- rep(0,length(x))
-for( i in 1:length(x) ){
- cat('.')
- eta  <- beta[1] + x[i]*beta[1+c] + colMeans(X[,setdiff(1:10,c)]) %*% beta[ 1+setdiff(1:10,c) ]
- p[i] <- inv.link(eta)
- 
- query <- sprintf('INSERT INTO analysis_prob VALUES (\'coef%s\',%f,%f);',c,x[i],p[i])
- query = dbSendQuery(db, query )
-}
 
+#Exporting SQL
+
+dbWriteTable(conn = db,name="apriori", value=out, row.names=FALSE)

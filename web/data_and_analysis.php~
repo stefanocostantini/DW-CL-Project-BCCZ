@@ -38,6 +38,15 @@
 		<div id="analysis" style="display: none">
 			<h2>Analysis</h2>
 <?php
+	$query = "SELECT x,p FROM ecommerce.analysis_prob WHERE coef='coef3'";
+	$title = "Probability of Success";
+	query_and_print_series($query,$title,"probability of success of coef 3");
+	echo "Comment 1";
+
+	$query = "SELECT * FROM ecommerce.analysis_estimates";
+	$title = "Parameter Estimates";
+	query_and_print_table($query,$title);
+	echo "Comment 2";
 
 	$query = "SELECT * FROM ecommerce.apriori";
 	$title = "Recommendation rules";
