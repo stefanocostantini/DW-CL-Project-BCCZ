@@ -48,7 +48,7 @@ function show_content(optionsId) {
 }
 </script>
 <body>
-	<div id="header"><h1>Product recommendation analysis</h1></div>
+	<div id="header"><h1>Product recommendation and customer analysis</h1></div>
 
 	<div id="menu">
 		<a id="home_link" href="#" class="active" onclick="show_content('home'); return false;">Home</a> &middot;
@@ -60,11 +60,13 @@ function show_content(optionsId) {
 
 		<div id="home">
 			<h2>Home</h2>
-
-			<p>
-			Here you have to describe what your app is about. Use approximately 200 words to summarise what is the service you are providing.
-			Add links to external sources like <a href="http://www.wikipedia.org" target="_blank">Wikipedia</a> if needed.
-			</p>
+			<h3>The challenge</h3>
+			<p>Every sales team seeks to identify and exploit opportunities to increase sales. In addition to acquiring new customers, another way to increase sales is to target existing customers by providing them with relevant offeres that might persuade them to purchase additional items. In order to be able to do that, a sales team would need to be able to build up offers that customers truly value and to identify those customers that are more likely to purchase new items. The first objective can be achieved by developing a recommendation engine which, based on a customer's intended purchases can recommend additional items that are related to those already in the shopping basket. The second objective can be achieved by analysing the average contribution that existing customers make across the entire product line. This is based on the idea that customers that already contribute to the company's revenues across a wider variety of products can more easily extend their purchases to additional items.</p>
+			<h3>The solution</h3>
+			<p>We have addressed the above challenges in two steps. First we have implemented a simple recommendation system, based on the <b><a href="http://www.wikipedia.org/wiki/Apriori_algorithm" target="_blank">Apriori algorithm.</a></b> This algorithm analyses existing transaction recorded in the database and develops associative rules between products, based on the frequency of them being purchased together. The output of the algorithm is a set of rules which link a set of two or more products (which are assumed to be already in the customer's basket) with an additional product that the customer is recommended to buy.</p>
+			<p>To address the second part of the challenge, i.e. to identify the company's "best customers", we have carried out a lasso regression of each customers purchases on the revenues associated to each product. We have used the results of this regression to rank customers according to their <b>average contribution</b> across a variety of products. In this way, given the same level of revenues generated, customers that buy across a wider range of products are considered to be more promising for further upselling compared to customer that only buy a limited set of products. We have used lasso regression given the high number of features in the regression.
+			</p>  
+					
 		</div>	
 
                 <?php include 'data_and_analysis.php' ?>
