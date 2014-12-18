@@ -38,7 +38,7 @@
 	$query = "SELECT 
        		  C1.CategoryName as Category_1, 
        		  C2.CategoryName as Category_2,
-       		  Count(DISTINCT O1.OrderID) as Number_of_occurences,
+       		  Count(DISTINCT O1.OrderID) as Number_of_occurences
 			  FROM ecommerce.products P1
        		  JOIN ecommerce.products P2
          	  ON P1.ProductID != P2.ProductID 
