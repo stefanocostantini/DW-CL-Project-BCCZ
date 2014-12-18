@@ -9,14 +9,15 @@
 	// Create connection
 	$link = connect_to_db();
 ?>
-		<div id="data" style="display: none">
-		<h2>Data</h2>
-		<p>In this section we carry out an initial analysis of past transaction, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
+	<div id="data" style="display: none">
+	
+	<h2>Data</h2>
+	
+	<p>In this section we carry out an initial analysis of past transaction, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
 
 <?php
 	// Page body. Write here your queries
 	
-	// query_and_print_graph: Needs two columns: the first one with labels, the second one with values of the graph
 	$query = "SELECT C1.CategoryName, SUM(O1.UnitPrice*O1.Quantity) as Revenue
  			  FROM ecommerce.products P1
        		  JOIN ecommerce.categories C1
@@ -28,9 +29,19 @@
 	$title = "Product categories by revenues";
 	query_and_print_graph($query,$title,"Euros");
 ?>
-	<p></p>
 
 	<p> The chart above shows the product categories ranked according to the revenues they generate. As shown in the chart, the top three categories (Confections, Dairy Products and Beverages) account for more than half of total revenues </p>
+	
+	<p>The chart below carries out the same analysis, this time to rank the customers that contribute the most to total revenues. Only the top 20 customers are shown below</p>
+	
+<?php
+	// Page body. Write here your queries
+	
+	$query = "SELECT b.CustomerID Customer, sum(a.Quantity*a.UnitPrice) Revenues from ecommerce.order_details a left join ecommerce.orders b on a.OrderID=b.OrderID group by CustomerID order by Revenues desc limit 20";
+	$title = "Product categories by revenues";
+	query_and_print_graph($query,$title,"Euros");
+?>
+
 	<p> We now consider associations between product categories as observed in past transactions. Specifically, the analysis below ranks the pairs of categories according to the number of times they are bought together</p>
 	
 <?php
@@ -51,7 +62,7 @@
               AND O2.ProductID = P2.ProductID 
   			  WHERE P1.CategoryID > P2.CategoryID          
 			  GROUP  BY P1.CategoryID, P2.CategoryID
-			  ORDER BY TimesTogether DESC";
+			  ORDER BY Number_of_occurences DESC";
 	query_and_print_table($query,$title);
 ?>
 	
@@ -60,20 +71,23 @@
 <?php
 
 	// Most sold product pairs
-	$query = "SELECT P1.ProductName as Product_1,
-       P2.ProductName as Product_2,
-       Count(DISTINCT O1.OrderID) as Number_of_occurences
-	   FROM ecommerce.products P1
-       JOIN ecommerce.products P2
-         ON P1.ProductID != P2.ProductID
-       LEFT JOIN ecommerce.order_details O1
-       INNER JOIN ecommerce.order_details O2
-       ON O1.OrderID = O2.OrderID
-       ON O1.ProductID = P1.ProductId
-       AND O2.ProductID = P2.ProductID            
-		GROUP  BY P1.ProductID, P2.ProductID
-		HAVING COUNT(DISTINCT O1.OrderID)>=5
-		order by COUNT(DISTINCT O1.OrderID) DESC";
+	
+	$query = "SELECT
+			  P1.ProductName as Product_1,
+       		  P2.ProductName as Product_2,
+       		  Count(DISTINCT O1.OrderID) as Number_of_occurrences
+			  FROM ecommerce.products P1
+       		  JOIN ecommerce.products P2
+         	  ON P1.ProductID != P2.ProductID
+       		  LEFT JOIN ecommerce.order_details O1
+              INNER JOIN ecommerce.order_details O2
+                ON O1.OrderID = O2.OrderID
+         		ON O1.ProductID = P1.ProductId
+            	AND O2.ProductID = P2.ProductID 
+			  WHERE P1.ProductID > P2.ProductID
+              GROUP BY P1.ProductID, P2.ProductID
+              HAVING COUNT(DISTINCT O1.OrderID)>=5
+			  ORDER BY Count(DISTINCT O1.OrderID) DESC";
 	$title = "Pairs of products frequently purchased together";
 	query_and_print_table($query,$title);
 
