@@ -13,15 +13,14 @@
 		<h2>Data</h2>
 <?php
 	// Page body. Write here your queries
-	$query = "SELECT * FROM ecommerce.customers limit 15";
 	$query = "SELECT P1.ProductID as ProductID1, P1.ProductName as ProductName1,
        P2.ProductID as ProductID2, P2.ProductName as ProductName2,
        Count(DISTINCT O1.OrderID) as NumberOfOccurences
-	   FROM products P1
-       JOIN products P2
+	   FROM ecommerce.products P1
+       JOIN ecommerce.products P2
          ON P1.ProductID != P2.ProductID
-       LEFT JOIN order_details O1
-       INNER JOIN order_details O2
+       LEFT JOIN ecommerce.order_details O1
+       INNER JOIN ecommerce.order_details O2
        ON O1.OrderID = O2.OrderID
        ON O1.ProductID = P1.ProductId
        AND O2.ProductID = P2.ProductID            
