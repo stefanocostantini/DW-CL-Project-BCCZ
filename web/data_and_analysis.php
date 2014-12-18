@@ -38,7 +38,7 @@
 	// Page body. Write here your queries
 	
 	$query = "SELECT b.CustomerID Customer, sum(a.Quantity*a.UnitPrice) Revenues from ecommerce.order_details a left join ecommerce.orders b on a.OrderID=b.OrderID group by CustomerID order by Revenues desc limit 20";
-	$title = "Product categories by revenues";
+	$title = "Customers by revenues";
 	query_and_print_graph($query,$title,"Euros");
 ?>
 
@@ -63,6 +63,7 @@
   			  WHERE P1.CategoryID > P2.CategoryID          
 			  GROUP  BY P1.CategoryID, P2.CategoryID
 			  ORDER BY Number_of_occurences DESC";
+	$title = "Pairs of product categories frequently purchased together";
 	query_and_print_table($query,$title);
 ?>
 	
