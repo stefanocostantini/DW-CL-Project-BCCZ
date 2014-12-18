@@ -91,8 +91,10 @@
 			  ORDER BY Count(DISTINCT O1.OrderID) DESC";
 	$title = "Pairs of products frequently purchased together";
 	query_and_print_table($query,$title);
-
 ?>
+	<p> In our analysis, presented in the next tab, we take this analysis further by carrying out an analysis of the customers marginal contribution to revenues and by implementing a product recommendation system.</p>
+
+
 	</div>
 	<div id="analysis" style="display: none">
 	<h2>Analysis</h2>
@@ -108,6 +110,13 @@
 ?>
 	<p>The table below shows the results of the lasso regression. Due to the quantity of response variables, we do not show the detailed regression results. Instead, we show a list of the top 20 customers identified by our analysis. Customers are ranked on the basis of the extent to which they contribute to the company's revenue across a wide variety of products. That is, given the same revenue contribution, a customer buying a wider range of products would be ranked above one buying a narrower one. We believe that this analysis would help the sale team identify the most promising customers for their marketing activities to target, perhaps in combination with the results of the recommendation engine above.</p>
 
+<?php
+
+	$query = "SELECT * FROM ecommerce.top_customers";
+	$title = "Top customers by marginal revenues";
+	query_and_print_table($query,$title);
+	echo "";
+?>
 
 		</div>
 <?php
