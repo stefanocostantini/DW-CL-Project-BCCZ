@@ -12,6 +12,7 @@
 		<div id="data" style="display: none">
 		<h2>Data</h2>
 		<p>In this section we carry out an initial analysis of past transaction, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
+
 <?php
 	// Page body. Write here your queries
 	
@@ -26,11 +27,10 @@
  			  ORDER BY Revenue DESC";
 	$title = "Product categories by revenues";
 	query_and_print_graph($query,$title,"Euros");
-
 ?>
+	<p></p>
 
 	<p> The chart above shows the product categories ranked according to the revenues they generate. As shown in the chart, the top three categories (Confections, Dairy Products and Beverages) account for more than half of total revenues </p>
-	
 	<p> We now consider associations between product categories as observed in past transactions. Specifically, the analysis below ranks the pairs of categories according to the number of times they are bought together</p>
 	
 <?php
@@ -42,8 +42,8 @@
 			  FROM ecommerce.products P1
        		  JOIN ecommerce.products P2
          	  ON P1.ProductID != P2.ProductID 
-        	  JOIN categories C1 on P1.CategoryID=C1.CategoryID 
-        	  JOIN categories C2 on P2.CategoryID=C2.CategoryID
+        	  JOIN ecommerce.categories C1 on P1.CategoryID=C1.CategoryID 
+        	  JOIN ecommerce.categories C2 on P2.CategoryID=C2.CategoryID
        		  LEFT JOIN ecommerce.order_details O1
               INNER JOIN ecommerce.order_details O2
               ON O1.OrderID = O2.OrderID
