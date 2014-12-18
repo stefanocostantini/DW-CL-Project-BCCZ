@@ -14,9 +14,23 @@
 <?php
 	// Page body. Write here your queries
 	$query = "SELECT * FROM ecommerce.customers limit 15";
-	$title = "Customer list (15 customers)";
+	$query = "SELECT P1.ProductID as ProductID1, P1.ProductName as ProductName1,
+       P2.ProductID as ProductID2, P2.ProductName as ProductName2,
+       Count(DISTINCT O1.OrderID) as NumberOfOccurences
+	   FROM products P1
+       JOIN products P2
+         ON P1.ProductID != P2.ProductID
+       LEFT JOIN order_details O1
+       INNER JOIN order_details O2
+       ON O1.OrderID = O2.OrderID
+       ON O1.ProductID = P1.ProductId
+       AND O2.ProductID = P2.ProductID            
+		GROUP  BY P1.ProductID, P2.ProductID
+		HAVING COUNT(DISTINCT O1.OrderID)>=5
+		order by COUNT(DISTINCT O1.OrderID) DESC";
+	$title = "Pairs of products frequently purchased together";
+	echo "The table below show a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a recommendation system, it can provide insight on customers' behaviour";
 	query_and_print_table($query,$title);
-	echo "Comment 1";
 
 	$query = "SELECT * FROM ecommerce.products LIMIT 10";
 	$title = "Product list (10 elements)";
