@@ -26,11 +26,14 @@
  			  ORDER BY Revenue DESC";
 	$title = "Product categories by revenues";
 	query_and_print_graph($query,$title,"Euros");
-	
+
+?>
+
 	<p> The chart above shows the product categories ranked according to the revenues they generate. As shown in the chart, the top three categories (Confections, Dairy Products and Beverages) account for more than half of total revenues </p>
 
 	<p> Finally, the table below show a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a recommendation system, it can provide insight on customers behaviour</p>
 
+<?php
 
 	// Most sold product pairs
 	$query = "SELECT P1.ProductName as Product_1,
