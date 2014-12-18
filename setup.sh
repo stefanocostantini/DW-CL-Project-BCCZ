@@ -14,7 +14,7 @@ install)
 
 	mysql -u $user -p$pswd < db/ecommerce.sql
 	mysql -u $user -p$pswd < data/ecommerce-dump.sql
-	mysql --local-infile -u $user -p$pswd -e "LOAD DATA LOCAL INFILE 'data/data.txt' INTO TABLE analysis_data_table" ecommerce
+	mysql -u $user -p$pswd < analysis/Customers_by_product.sql
 
 	mkdir -p "$HOME/public_html/MyApp"
 	cp -rf web/* "$HOME/public_html/MyApp"

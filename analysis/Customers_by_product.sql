@@ -1,4 +1,5 @@
-# Pivoting http://stratosprovatopoulos.com/web-development/mysql/pivot-a-table-in-mysql/ 
+USE ecommerce;
+
 DROP PROCEDURE IF EXISTS PivotingView;
 DELIMITER //
 CREATE PROCEDURE PivotingView ()
@@ -51,5 +52,4 @@ SELECT a.OrderID, sum(a.Quantity) Quantity, a.ProductID, c.ProductName, b.Custom
     GROUP BY ProductID, CustomerID;
 
 call PivotingView();  
-select * from ProductsVsCustomers_Pivot;
 

@@ -28,4 +28,9 @@ colnames(out)<-"Rules"
 dbSendQuery(db,"drop table if exists apriori")
 dbWriteTable(conn = db,name="apriori", value=out, row.names=FALSE)
 
-#### IMPLEMENTATION OF LASSO REGRESSION #### 
+#### IMPLEMENTATION OF LASSO REGRESSION ####
+
+#Extract data from data set
+result = dbSendQuery(db, "select * from ProductsVsCustomers_Pivot")
+dataPCsC = fetch(result, n=-1)
+
