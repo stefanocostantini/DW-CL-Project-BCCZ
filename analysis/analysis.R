@@ -101,7 +101,7 @@ dbWriteTable(conn = db,name="top_customers", value=TableFinal, row.names=FALSE)
 
 o <- c(1,2,3,4)
 p <- c(2,5,2,3)
-png("web/categories.png")
+png("categories.png")
 plot(p,o)
 dev.off()
 
