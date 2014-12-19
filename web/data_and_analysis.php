@@ -42,34 +42,20 @@
 	query_and_print_graph($query,$title,"Euros");
 ?>
 
-	<p> We now consider associations between product categories as observed in past transactions. Specifically, the analysis below ranks the pairs of categories according to the number of times they are bought together</p>
+	<p> We now consider associations between product categories as observed in past transactions. Specifically, the chart below shown the links between pairs of categories according to the number of times they are bought together. The thicker the network edge connecting two categories, the more often those two categories are found together in the customers' baskets.</p>
 	
 <?php
 	// Most sold categories pairs
-	$query = "SELECT 
-       		  C1.CategoryName as Category_1, 
-       		  C2.CategoryName as Category_2,
-       		  Count(DISTINCT O1.OrderID) as Number_of_occurences
-			  FROM ecommerce.products P1
-       		  JOIN ecommerce.products P2
-         	  ON P1.ProductID != P2.ProductID 
-        	  JOIN ecommerce.categories C1 on P1.CategoryID=C1.CategoryID 
-        	  JOIN ecommerce.categories C2 on P2.CategoryID=C2.CategoryID
-       		  LEFT JOIN ecommerce.order_details O1
-              INNER JOIN ecommerce.order_details O2
-              ON O1.OrderID = O2.OrderID
-         	  ON O1.ProductID = P1.ProductId
-              AND O2.ProductID = P2.ProductID 
-  			  WHERE P1.CategoryID > P2.CategoryID          
-			  GROUP  BY P1.CategoryID, P2.CategoryID
-			  ORDER BY Number_of_occurences DESC";
-	$title = "Pairs of product categories frequently purchased together";
+	$query = "";
+	$title = "Connections between product categories frequently purchased together";
 	query_and_print_table($query,$title);
 ?>
-	
+
+	<div id="outer" style="width:100%">  
+    	<div id="inner"><img src="categories_network.png" width="180%" height="180%"></img></div>
+	</div>
+
 	<p> Finally, the table below show a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a recommendation system, it can provide insight on customers behaviour</p>
-	
-    <img src="categories_network.png"></img>
 	
 <?php
 
