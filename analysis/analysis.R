@@ -22,7 +22,7 @@ result = dbSendQuery(db, "SELECT C1.CategoryName as from,
                           AND O2.ProductID = P2.ProductID 
   			                  WHERE P1.CategoryID > P2.CategoryID          
 			                    GROUP  BY P1.CategoryID, P2.CategoryID
-			                    ORDER BY Number_of_occurences DESC")
+			                    ORDER BY weight DESC")
 relations = fetch(result, n=-1)
 
 result = dbSendQuery(db, "SELECT C1.CategoryName, SUM(O1.UnitPrice*O1.Quantity) as Revenue
