@@ -7,9 +7,9 @@ db = dbConnect(MySQL(), user='root', password='root', dbname='ecommerce', host='
 
 # Import data
 
-result = dbSendQuery(db, "SELECT C1.CategoryName as from, 
-       		                C2.CategoryName as to,
-       		                Count(DISTINCT O1.OrderID) as weight
+result = dbSendQuery(db, "SELECT C1.CategoryName as Cat1, 
+       		                C2.CategoryName as Cat2,
+       		                Count(DISTINCT O1.OrderID) as Weight
 			                    FROM products P1
        		                JOIN products P2
          	                ON P1.ProductID != P2.ProductID 
@@ -22,8 +22,9 @@ result = dbSendQuery(db, "SELECT C1.CategoryName as from,
                           AND O2.ProductID = P2.ProductID 
   			                  WHERE P1.CategoryID > P2.CategoryID          
 			                    GROUP  BY P1.CategoryID, P2.CategoryID
-			                    ORDER BY weight DESC")
+			                    ORDER BY Weight DESC")
 relations = fetch(result, n=-1)
+colnames(relations) = c("from","to","weight")
 
 result = dbSendQuery(db, "SELECT C1.CategoryName, SUM(O1.UnitPrice*O1.Quantity) as Revenue
                           FROM products P1
