@@ -44,7 +44,7 @@
 
 	<p> We now consider associations between product categories as observed in past transactions. Specifically, the chart below shown the links between pairs of categories according to the number of times they are bought together. The thicker the network edge connecting two categories, the more often those two categories are found together in the customers' baskets.</p>
 	
-	<img src="categories_network.png" style="margin: 0 auto;" width="480" height="480"></img>
+	<img src="categories_network.png" style="width: 40%">
 
 	<p> Finally, the table below show a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a recommendation system, it can provide insight on customers behaviour</p>
 	
