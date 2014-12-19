@@ -28,6 +28,8 @@ To develop the product recommendation system we have used the Apriori algorithm.
 
 To develop the LASSO regression, we first have identified the top 20 customers in terms of total revenues generated. Then we have carried out a LASSO regression using the `lars` package with the objective to narrow down the number of customers with a significant marginal contribution to revenues. 
 
+The 'Data' tab includes a network graph of the links between product categories. Note that the graph is generated dynamically each time the `./setup.sh run` command is given. The script saves a `.png` file in the `/web` sub-directory, which is then retrieved via `html` link.
+
 ### Required packages
 
 The `R` analysis relies on the following packages. 
