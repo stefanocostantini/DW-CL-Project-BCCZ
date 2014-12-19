@@ -3,7 +3,7 @@ img { border: 1px solid #e0e0e0; width: 350px;}
 body {
 	font: 1em Verdana, sans-serif;
 	color: #333333;
-	background-image: url("/images/bk.png") repeat-x bottom;
+	background-image: url("bk.png") repeat-x bottom;
 	border: 0;
 	margin: 0;
 	font-size:75%;
@@ -28,7 +28,7 @@ body {
 	margin-top: 15px;
     margin-left: 70px;
 	margin-right: 50px;
-	background-image: url("/images/background.png");
+	background-image: url("background.png");
 	padding-top: 5px;
 	padding-left: 15px;
 	padding-right: 15px;

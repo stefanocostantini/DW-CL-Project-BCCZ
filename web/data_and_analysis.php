@@ -87,6 +87,8 @@
 	echo "";
 ?>
 
+	<p>We build a linear regression model of the revenues per product using the quantity of each product purchased by the different customers as explanatory factors. We consider each different product as a new observation of the revenue generated. Other explanatory factors have been considered such as the price of the product, the quantity per product, the average expenses, or the mean product price. However, the quantity of each product purchased by the different customers gave the best interpretability of the results and provides the best matching to the recommendation system. Since most of the customers only bought a small fraction of the products our data matrix is sparse. We use the Lasso regression since it is optimal for sparse data, but also because it allows us to focus on the most relevant customers.</p>
+
 	<p>The table below shows the coefficients of the LASSO Regression. We have used the results of this regression to rank customers according to their <b>average monetary contribution</b> to total revenues from buying one additional product. That is, given the same revenue contribution, a customer buying a wider range of products would be ranked above one buying a narrower one. We believe that this analysis would help the sales team in two aspects:</p>
 
 		<ul style="list-style-type:circle">
