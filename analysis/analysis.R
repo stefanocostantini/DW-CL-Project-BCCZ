@@ -96,3 +96,11 @@ TableFinal<-cbind(func,lasso.coef)
 #Exporting SQL table
 dbSendQuery(db,"drop table if exists top_customers")
 dbWriteTable(conn = db,name="top_customers", value=TableFinal, row.names=FALSE)
+
+##### TESTING IMAGE SAVING
+
+o <- c(1,2,3,4)
+p <- c(2,5,2,3)
+png("categories.png")
+plot(p,o)
+dev.off()
