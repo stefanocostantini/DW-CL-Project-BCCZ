@@ -93,7 +93,7 @@
 
 		<ul style="list-style-type:circle">
 
-  			<li> Identify the most promising customers for their marketing activities to target. The customers with larger marginal revenues are the most susceptible to increase their expenses either by increasing the quantity of the products they usually have in the basket or by purchasing products they have not tried yet (FOR EXAMPLE: LINK TO THE NEWSLETTER).</li>
+  			<li> Identify the most promising customers for their marketing activities to target. The customers with larger marginal revenues are the most susceptible to increase their expenses either by increasing the quantity of the products they usually have in the basket or by purchasing products they have not tried yet <a href="http://80y.mjt.lu/nl/80y/s6zjm.html">(Something like this, for example).</a></li>
 
 			<li> Relax the potentially over-estimation of certain clients. For example, the client SAVEA is the client that generated more revenue for the firm <em>(see plot "Customers by Revenue")</em> up to now. However, according to the results of the LASSO analysis, it is not be the client that will increase the most the firm's revenue by buying one extra unit of "an average product". We strongly suggest doing this exercise (the LASSO Regression) before every new marketing campaign, to update the ranking of the "most interesting revenue generating customers"</li>
 		
