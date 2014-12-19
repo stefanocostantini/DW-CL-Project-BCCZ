@@ -100,7 +100,7 @@
 <?php
 
 	$query = "SELECT * FROM ecommerce.top_customers";
-	$title = "Top customers by marginal revenues";
+	$title = "Top customers by marginal revenue contribution";
 	query_and_print_table($query,$title);
 	echo "";
 ?>

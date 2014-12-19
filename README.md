@@ -14,12 +14,13 @@ We believe that this information could be used by a marketing department to deve
 
 ### Structure
 
-The core of the analysis is contained in this two files:
+The core of the analysis is contained in these three files:
 
+- `Customers_by_product.sql`
 - `data_and_analysis.php`
 - `analysis.R`
 
-Note that some of the key `SQL` queries, to obtain the data for the analysis but also to create a network graph, are contained in the `R` file.
+Note that some of the key `SQL` queries, to generate the data for the analysis but also to create a network graph, are contained in both the `R` file and the additional `Customers_by_product.sql` file. The latter is called by the setup script after the database is populated.
 
 ### Implementation
 
