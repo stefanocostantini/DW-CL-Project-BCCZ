@@ -44,60 +44,25 @@ row.names(x)<-dataPCsC[,2]
 x[is.na(x)] <- 0
 z <- as.matrix(x)
 
-
-soft.threshold <- function(x,lambda){
-  sign(x)*max( c( abs(x) - lambda , 0 ) )
-}
-
-lasso.shooting <- function(y,X,lambda){
-  
-  max.iter <- 10;
-  P        <- ncol(X);
-  
-  beta       <- solve(t(X)%*%X,t(X)%*%y)
-  beta.prev  <- beta
-  
-  for( iter in 1:max.iter ){
-    for( i in 1:P ){
-      
-      y.aux <- y-X[,setdiff(1:P,i)]%*%beta[setdiff(1:P,i)]
-      x.aux <- X[,i]
-      
-      cov <- sum( y.aux*x.aux )
-      var <- sum( x.aux*x.aux )
-      
-      beta[i] <- soft.threshold( cov/var , lambda/(2*var) )
-      
-      if( sum( (beta-beta.prev)**2 ) < 1e-6 ){ return(beta) }
-      
-      beta.prev <- beta
-    }    
-  }
-  
-  beta
-}
-
-ev <- eigen(t(z)%*%z)$values
-lambda <- max(ev)
-
-## Lasso Coef using Shooting Lasso
-lasso.coef<-as.data.frame(lasso.shooting(y,z,lambda))
-
 ## Lasso Coef using Package
-library(glmnet)
-set.seed(1)
-cv <- cv.glmnet(z, y, nfolds = 10)
-cv$lambda.min
-mdl <- glmnet(z, y, lambda = cv$lambda.min)
-func<-as(mdl$beta, "matrix")
+library(lars)
 
-TableFinal<-cbind(func,lasso.coef)
+set.seed(1)
+lasso<-lars(z,y, type = "lasso",trace=TRUE, use.Gram = TRUE)
+cv.lasso<-cv.lars(z,y, type="lasso")
+limit<-min(cv.lasso$cv)+cv.lasso$cv.error[which.min(cv.lasso$cv)]
+s.cv<-cv.lasso$index[min(which(cv.lasso$cv<limit))]
+lasso.coef<-as.data.frame(coef(lasso, s = s.cv, mode="fraction"))
+colnames(lasso.coef)<-c("Coefficient")
+vvv<-cbind(Customer=rownames(lasso.coef),lasso.coef)
+rownames(vvv)<-NULL
+TableFinal<-vvv[order(-vvv$Coefficient),]
 
 #Exporting SQL table
 dbSendQuery(db,"drop table if exists top_customers")
 dbWriteTable(conn = db,name="top_customers", value=TableFinal, row.names=FALSE)
 
-##### TESTING IMAGE SAVING
+##### TESTING IMAGE SAVING (to be replaced with Laura's code)
 
 o <- c(1,2,3,4)
 p <- c(2,5,2,3)
