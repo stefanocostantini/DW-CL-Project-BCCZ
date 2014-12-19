@@ -14,25 +14,18 @@
 	<h2>Data</h2>
 	
 	<p>In this section we carry out an initial analysis of past transaction, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
+	
+	<p> The chart below shows the best selling products ranked according to the revenues they generate. Only the top 10 best selling products are shown.</p>
 
 <?php
-	// Page body. Write here your queries
-	
-	$query = "SELECT C1.CategoryName, SUM(O1.UnitPrice*O1.Quantity) as Revenue
- 			  FROM ecommerce.products P1
-       		  JOIN ecommerce.categories C1
-         	  ON P1.CategoryID= C1.CategoryID
-         	  LEFT JOIN ecommerce.order_details O1
-          	  ON O1.ProductID = P1.ProductId
- 			  GROUP BY CategoryName
- 			  ORDER BY Revenue DESC";
-	$title = "Product categories by revenues";
-	query_and_print_graph($query,$title,"Euros");
+    // Total Revenue by product
+    
+    $query = "SELECT ProductName, Revenue FROM ecommerce.ProductsVsCustomers_Pivot ORDER BY Revenue DESC limit 10";
+    $title = "Products by revenues";
+    query_and_print_graph($query,$title,"Euros");
 ?>
-
-	<p> The chart above shows the product categories ranked according to the revenues they generate. As shown in the chart, the top three categories (Confections, Dairy Products and Beverages) account for more than half of total revenues </p>
 	
-	<p>The chart below carries out the same analysis, this time to rank the customers that contribute the most to total revenues. Only the top 20 customers are shown below</p>
+	<p>The chart below shows the results of a similar analysis, this time to rank the customers that contribute the most to total revenues. Only the top 20 customers are shown below</p>
 	
 <?php
 	// Page body. Write here your queries
@@ -42,11 +35,15 @@
 	query_and_print_graph($query,$title,"Euros");
 ?>
 
-	<p> We now consider associations between product categories as observed in past transactions. Specifically, the chart below shown the links between pairs of categories according to the number of times they are bought together. The thicker the network edge connecting two categories, the more often those two categories are found together in the customers' baskets.</p>
+	<p>Once we have identified the best selling products and the top customers, we seek to improve our understanding of the relationships between them.</p>
+	
+	<p> We start from considering associations between product categories as observed in past transactions. Specifically, the chart below shown the links between pairs of categories according to the number of times they are bought together. The thicker the network edge connecting two categories, the more often those two categories are found together in the customers' baskets. The size of the circles is proportional to the total revenues that each product categories generates.</p>
 	
 	<center><img src="categories_network.png" style="width: 40%"></center>
 
-	<p> Finally, the table below show a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a recommendation system, it can provide insight on customers behaviour</p>
+	<p>The information provided in the network graph above could be used to informed marketing campaigns that cover two or more product categories, so that the marketing team could deploy offers for products that belong to categories that "go together".
+	
+	<p> We then go one layer below to look at the associations between products. The table below shows a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a fully-fledge recommendation system, it can provide insight on customers behaviour that can be used in setting up marketing campaigns.</p>
 	
 <?php
 
