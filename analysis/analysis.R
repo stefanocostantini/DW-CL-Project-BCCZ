@@ -34,7 +34,7 @@ result = dbSendQuery(db, "SELECT C1.CategoryName, SUM(O1.UnitPrice*O1.Quantity) 
                           ON O1.ProductID = P1.ProductId
                           GROUP BY CategoryName
                           ORDER BY Revenue DESC")
-totalrevenue = fetch(resultm n=-1)
+totalrevenue = fetch(result, n=-1)
 
 # Load (DIRECTED) graph from data frame 
 g <- graph.data.frame(relations, directed=FALSE)
