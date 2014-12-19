@@ -96,24 +96,25 @@ dataPVsC[,1]
 y<-as.matrix(dataPCsC[,3])
 x <- dataPCsC[,c(dataPVsC[,1])] # Using best 20 customers
 row.names(x)<-dataPCsC[,2]
-x[is.na(x)] <- 0
+x[is.na(x)] <- 0.00000000001
 z <- as.matrix(x)
 
 ## Lasso Coef using Package
 library(lars)
 
 set.seed(1)
-lasso<-lars(z,y, type = "lasso",trace=TRUE, use.Gram = TRUE)
+lasso<-lars(log(z),log(y), type = "lasso",trace=TRUE, use.Gram = TRUE)
 cv.lasso<-cv.lars(z,y, type="lasso")
 limit<-min(cv.lasso$cv)+cv.lasso$cv.error[which.min(cv.lasso$cv)]
 s.cv<-cv.lasso$index[min(which(cv.lasso$cv<limit))]
-lasso.coef<-as.data.frame(round(coef(lasso, s = s.cv, mode="fraction"),2))
-colnames(lasso.coef)<-c("Coefficient")
+lasso.coef<-as.data.frame(round(coef(lasso, s = s.cv, mode="fraction")*100,digits = 4))
+colnames(lasso.coef)<-c("Percentage")
 vvv<-cbind(Customer=rownames(lasso.coef),lasso.coef)
 rownames(vvv)<-NULL
-TableFinal<-vvv[order(-vvv$Coefficient),]
+TableFinal<-vvv[order(-vvv$Percentage),]
 
 #Exporting SQL table
 dbSendQuery(db,"drop table if exists top_customers")
 dbWriteTable(conn = db,name="top_customers", value=TableFinal, row.names=FALSE)
+
 

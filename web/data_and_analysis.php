@@ -13,7 +13,7 @@
 	
 	<h2>Data</h2>
 	
-	<p>In this section we carry out an initial analysis of past transaction, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
+	<p>In this section we carry out an initial analysis of past transactions, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
 	
 	<p> The chart below shows the best selling products ranked according to the revenues they generate. Only the top 10 best selling products are shown.</p>
 
@@ -25,7 +25,7 @@
     query_and_print_graph($query,$title,"Euros");
 ?>
 	
-	<p>The chart below shows the results of a similar analysis, this time to rank the customers that contribute the most to total revenues. Only the top 20 customers are shown below</p>
+	<p>The chart below shows the results of a similar analysis, this time to rank the customers that contribute the most to total revenues. Only the top 20 customers are shown below.</p>
 	
 <?php
 	// Page body. Write here your queries
@@ -43,7 +43,7 @@
 
 	<p>The information provided in the network graph above could be used to informed marketing campaigns that cover two or more product categories, so that the marketing team could deploy offers for products that belong to categories that "go together".
 	
-	<p> We then go one layer below to look at the associations between products. The table below shows a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a fully-fledge recommendation system, it can provide insight on customers behaviour that can be used in setting up marketing campaigns.</p>
+	<p> We then go one layer further to look at the associations between products. The following table shows a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a fully-fledge recommendation system, it can provide insight on customers behaviour that can be used in setting up marketing campaigns.</p>
 	
 <?php
 
@@ -68,7 +68,7 @@
 	$title = "Pairs of products frequently purchased together";
 	query_and_print_table($query,$title);
 ?>
-	<p> In our analysis, presented in the next tab, we take this analysis further by carrying out an analysis of the customers marginal contribution to revenues and by implementing a product recommendation system.</p>
+	<p> In the next tab, we take this analysis further by by implementing a product recommendation system and by looking at customers marginal contribution to revenues using a LASSO regression.</p>
 
 
 	</div>
@@ -93,7 +93,7 @@
 
   			<li> Identify the most promising customers for their marketing activities to target. The customers with larger marginal revenues are the most susceptible to increase their expenses either by increasing the quantity of the products they usually have in the basket or by purchasing products they have not tried yet (FOR EXAMPLE: LINK TO THE NEWSLETTER).</li>
 
-			<li> Relax the potentially over-estimation of certain clients. For example, the client SAVEA is the client that generated more revenue for the firm <em>(see plot "Customers by Revenue")</em> up to now. However, according to the results of the LASSO analysis, it is not be the client that will increase the most the firm’s revenue by buying one extra unit of “an average product”. We strongly suggest doing this exercise (the LASSO Regression) before every new marketing campaign, to update the ranking of the "most interesting revenue generating customers"</li>
+			<li> Relax the potentially over-estimation of certain clients. For example, the client SAVEA is the client that generated more revenue for the firm <em>(see plot "Customers by Revenue")</em> up to now. However, according to the results of the LASSO analysis, it is not be the client that will increase the most the firm's revenue by buying one extra unit of "an average product". We strongly suggest doing this exercise (the LASSO Regression) before every new marketing campaign, to update the ranking of the "most interesting revenue generating customers"</li>
 		
 		</ul>
 
