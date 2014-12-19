@@ -70,8 +70,6 @@ function show_content(optionsId) {
 			</ul>
 			
 			<h3>The solution</h3>
-			
-			<b><a href="http://www.wikipedia.org/wiki/Apriori_algorithm" target="_blank">Apriori algorithm.</a></b>
 						
 			<p>We have addressed the above challenges in two steps:</p>
 				<ul style="list-style-type:circle">
