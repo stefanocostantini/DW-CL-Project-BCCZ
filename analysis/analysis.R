@@ -45,7 +45,7 @@ g <- graph.data.frame(relations, directed=FALSE)
 node.size<-setNames(totalrevenue$Revenue,totalrevenue$CategoryName)
 
 # Plot and save graph
-png("categories_network.png")
+png("/web/categories_network.png")
 plot(g, vertex.label = V(g)$name,
      vertex.shape="circle",
      vertex.color="orange",
