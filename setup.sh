@@ -36,6 +36,7 @@ run)
 	R CMD BATCH --vanilla analysis/analysis.R 
 	cat analysis.Rout
 	rm analysis.Rout
+	cp web/categories_network.png "$HOME/public_html/MyApp"
 
 	;;
 

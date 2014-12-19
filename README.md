@@ -35,7 +35,7 @@ The 'Data' tab includes a network graph of the links between product categories.
 The `R` analysis relies on the following packages. 
 
 - `igraph`
-- `apriori`
+- `arules`
 - `lars`
 
 Note that the installation of the `igraph` package could require 2-3 minutes of the virtual machine.
