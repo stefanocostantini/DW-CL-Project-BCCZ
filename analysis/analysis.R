@@ -1,11 +1,62 @@
 library(RMySQL)
 
+#Connection to SQL
+db = dbConnect(MySQL(), user='root', password='root', dbname='ecommerce', host='localhost')
+
+##### GENERATING THE CATEGORIES MAP
+
+# Import data
+
+result = dbSendQuery(db, "SELECT C1.CategoryName as from, 
+       		                C2.CategoryName as to,
+       		                Count(DISTINCT O1.OrderID) as weight
+			                    FROM products P1
+       		                JOIN products P2
+         	                ON P1.ProductID != P2.ProductID 
+        	                JOIN categories C1 on P1.CategoryID=C1.CategoryID 
+        	                JOIN categories C2 on P2.CategoryID=C2.CategoryID
+       		                LEFT JOIN order_details O1
+                          INNER JOIN order_details O2
+                          ON O1.OrderID = O2.OrderID
+         	                ON O1.ProductID = P1.ProductId
+                          AND O2.ProductID = P2.ProductID 
+  			                  WHERE P1.CategoryID > P2.CategoryID          
+			                    GROUP  BY P1.CategoryID, P2.CategoryID
+			                    ORDER BY Number_of_occurences DESC")
+relations = fetch(result, n=-1)
+
+result = dbSendQuery(db, "SELECT C1.CategoryName, SUM(O1.UnitPrice*O1.Quantity) as Revenue
+                          FROM products P1
+                          JOIN categories C1
+                          ON P1.CategoryID= C1.CategoryID
+                          LEFT JOIN ecommerce.order_details O1
+                          ON O1.ProductID = P1.ProductId
+                          GROUP BY CategoryName
+                          ORDER BY Revenue DESC")
+totalrevenue = fetch(resultm n=-1)
+
+# Load (DIRECTED) graph from data frame 
+g <- graph.data.frame(relations, directed=FALSE)
+
+# Define size of nodes
+node.size<-setNames(totalrevenue$Revenue,totalrevenue$CategoryName)
+
+# Plot and save graph
+png("categories.png")
+plot(g, vertex.label = V(g)$name,
+     vertex.shape="circle",
+     vertex.color="orange",
+     vertex.label.dist=1.2,
+     vertex.size=node.size/10000,
+     edge.width=E(g)$weight/20,
+     vertex.label.cex=1.1,
+     vertex.label.family="Helvetica"
+)
+dev.off()
+
 #### IMPLEMENTATION OF APRIORI ALGORITHM ####
 
 library(arules)
-
-#Connection to SQL
-db = dbConnect(MySQL(), user='root', password='root', dbname='ecommerce', host='localhost')
 
 #Run query of Interest
 result = dbSendQuery(db, "select distinct(a.OrderID), b.ProductName , b.ProductID from order_details a join products b on a.ProductID = b.ProductID order by a.OrderID")
@@ -61,13 +112,4 @@ TableFinal<-vvv[order(-vvv$Coefficient),]
 #Exporting SQL table
 dbSendQuery(db,"drop table if exists top_customers")
 dbWriteTable(conn = db,name="top_customers", value=TableFinal, row.names=FALSE)
-
-##### TESTING IMAGE SAVING (to be replaced with Laura's code)
-
-o <- c(1,2,3,4)
-p <- c(2,5,2,3)
-png("categories.png")
-plot(p,o)
-dev.off()
-
 

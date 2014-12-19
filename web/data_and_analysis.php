@@ -69,7 +69,9 @@
 	
 	<p> Finally, the table below show a ranking of pairs of products that tend to be purchased together. The pairs of products are ranked according to the number of times each pair appears in a transaction. To focus on the most relevant information, we show only the product pairs that appear at least five times. While this information does not, on its own, provide a recommendation system, it can provide insight on customers behaviour</p>
 	
-	<img src="categories.png"></img>
+	<div id="outer" style="width:100%">  
+    <div id="inner"><img src="categories.png"></img></div>
+	</div>
 
 <?php
 
