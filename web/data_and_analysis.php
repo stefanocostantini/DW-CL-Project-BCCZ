@@ -77,9 +77,11 @@
 	</div>
 	<div id="analysis" style="display: none">
 	<h2>Analysis</h2>
-			
-	<p>Below we show the top 20 product recommendation rules identified by the <b>Apriori algorithm</b>. The table can be read as follows: for each rule, the left-hand side shows a potential basket that the customer has put together, while the right-hand side shows the additional product that could be purchased to "complete the basket". For example, the first rule indicates that a customer that has already added dried applies and sild (herring) to her basket, would be recommended gorgonzola cheese <em>(note: it sounds disgusting but the customer is always right!)</em> The recommendations are based on the analysis of historical transaction already stored in the database.</p>
+	
+	<p>Below we show the top 20 product recommendation rules identified by the <b>Apriori algorithm</b>. The table can be read as follows: for each rule, the left-hand side shows a potential basket that the customer has put together, while the right-hand side shows the additional product that could be purchased to "complete that basket".</p>
 
+	<p>For example, the first rule indicates that a customer that has already added dried applies and sild (herring) to her basket, would be recommended gorgonzola cheese <em>(note: it sounds disgusting but the customer is always right!)</em> The recommendations are based on the analysis of historical transaction already stored in the database.</p>
+			
 <?php
 
 	$query = "SELECT * FROM ecommerce.apriori";
@@ -87,7 +89,16 @@
 	query_and_print_table($query,$title);
 	echo "";
 ?>
-	<p>The table below shows the results of the lasso regression. Due to the quantity of response variables, we do not show the detailed regression results. Instead, we show a list of the top 20 customers identified by our analysis. Customers are ranked on the basis of the extent to which they contribute to the company's revenue across a wide variety of products. That is, given the same revenue contribution, a customer buying a wider range of products would be ranked above one buying a narrower one. We believe that this analysis would help the sale team identify the most promising customers for their marketing activities to target, perhaps in combination with the results of the recommendation engine above.</p>
+
+	<p>The table below shows the coefficients of the LASSO Regression. We have used the results of this regression to rank customers according to their <b>average monetary contribution</b> to total revenues from buying one additional product. That is, given the same revenue contribution, a customer buying a wider range of products would be ranked above one buying a narrower one. We believe that this analysis would help the sales team in two aspects:</p>
+
+		<ul style="list-style-type:circle">
+
+  			<li> Identify the most promising customers for their marketing activities to target. The customers with larger marginal revenues are the most susceptible to increase their expenses either by increasing the quantity of the products they usually have in the basket or by purchasing products they have not tried yet (FOR EXAMPLE: LINK TO THE NEWSLETTER).</li>
+
+			<li> Relax the potentially over-estimation of certain clients. For example, the client SAVEA is the client that generated more revenue for the firm <em>(see plot "Customers by Revenue")</em> up to now. However, according to the results of the LASSO analysis, it is not be the client that will increase the most the firm’s revenue by buying one extra unit of “an average product”. We strongly suggest doing this exercise (the LASSO Regression) before every new marketing campaign, to update the ranking of the "most interesting revenue generating customers"</li>
+		
+		</ul>
 
 <?php
 
