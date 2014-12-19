@@ -112,6 +112,10 @@ body {
 }
 
 #footer{
+	position: relative;
+	bottom: 0px;
+	display: block;
+	height:100px;
 	font-size: 100%;
 	color: #e6510d;
 	text-align: center;
@@ -121,7 +125,6 @@ body {
 	padding-bottom: 30px;
 	margin-left: 30px;
 	margin-right: 30px;
-	position: relative;
 	z-index: -10;
 	
 }
