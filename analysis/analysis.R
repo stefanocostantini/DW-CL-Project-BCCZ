@@ -107,7 +107,7 @@ lasso<-lars(z,y, type = "lasso",trace=TRUE, use.Gram = TRUE)
 cv.lasso<-cv.lars(z,y, type="lasso")
 limit<-min(cv.lasso$cv)+cv.lasso$cv.error[which.min(cv.lasso$cv)]
 s.cv<-cv.lasso$index[min(which(cv.lasso$cv<limit))]
-lasso.coef<-as.data.frame(coef(lasso, s = s.cv, mode="fraction"))
+lasso.coef<-as.data.frame(round(coef(lasso, s = s.cv, mode="fraction"),2))
 colnames(lasso.coef)<-c("Coefficient")
 vvv<-cbind(Customer=rownames(lasso.coef),lasso.coef)
 rownames(vvv)<-NULL
