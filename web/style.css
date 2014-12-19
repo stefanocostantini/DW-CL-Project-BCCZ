@@ -184,14 +184,7 @@ body {
 
 ul, li {margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent;}
 
-a {
-	color: #e84e0f;
-	text-decoration: none;
-}
-a:hover {
-	color: #d7632f;
-	text-decoration: none;
-}
+
 
 h1 {
 	font: 1.8em Arial, Verdana, sans-serif;
