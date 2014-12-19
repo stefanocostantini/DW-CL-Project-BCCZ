@@ -5,6 +5,8 @@ db = dbConnect(MySQL(), user='root', password='root', dbname='ecommerce', host='
 
 ##### GENERATING THE CATEGORIES MAP
 
+library(igraph)
+
 # Import data
 
 result = dbSendQuery(db, "SELECT C1.CategoryName as Cat1, 
