@@ -85,7 +85,7 @@ body {
 	*/
 }
 
-#main h2 { color: #1C2A57; margin-top: 0.2em; padding-left: 0.6em; border-bottom: 1px solid #e0e0e0;}
+#main h2 { color: #1C2A57; margin-top: 0.2em; margin-bottom: 0.2em; border-bottom: 1px solid #e0e0e0;}
 #main h3 { margin-top: 0.2em; }
 
 #main a { color: #1C2A57;  }
