@@ -44,13 +44,6 @@
 
 	<p> We now consider associations between product categories as observed in past transactions. Specifically, the chart below shown the links between pairs of categories according to the number of times they are bought together. The thicker the network edge connecting two categories, the more often those two categories are found together in the customers' baskets.</p>
 	
-<?php
-	// Most sold categories pairs
-	$query = "";
-	$title = "Connections between product categories frequently purchased together";
-	query_and_print_table($query,$title);
-?>
-
 	<div id="outer" style="width:100%">  
     	<div id="inner"><img src="categories_network.png" width="180%" height="180%"></img></div>
 	</div>
