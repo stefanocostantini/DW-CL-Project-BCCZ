@@ -5,7 +5,7 @@ body {
 	color: #333333;
 	border: 0;
 	margin: 0;
-	font-size:75%;
+	font-size:85%;
     font-family: 12px Arial, Helvetica, Sans-serif;
 	text-decoration:none;
     line-height:1.3em;
@@ -112,7 +112,7 @@ body {
 }
 
 #footer{
-	font-size: 80%;
+	font-size: 100%;
 	color: #e6510d;
 	text-align: center;
 	font-weight: bold;
@@ -133,58 +133,6 @@ body {
 	height: 0.9px;
 }
 
-
-/* homepage text */
-.text_home {
-	padding: 8px;
-	text-align: justify;
-	overflow: visible;
-	text-decoration: none;
-	overflow:invisible;
-	
-}
-
-.text_home a {
-	text-decoration: none;
-}
-.text_home a:hover {
-	text-decoration: underline;
-	color: #e6510d;
-}
-
-.text_home .titulo {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #e6510d;
-	padding-bottom:  4px;
-	line-height: 200%;
-	left:40px;
-
-}
-.text_home .titulohome {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #e6510d;
-	text-decoration: none;
-	line-height: 200%;
-
-}
-.text_home .titulohome a {
-	color: #e6510d;
-	text-decoration: none;
-	line-height: 200%;
-}
-
-.text_home .texto {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #494949;
-	text-decoration: none;
-	line-height: 150%;
-}
-
-
-ul, li {margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent;}
-
-
-
 h1 {
 	font: 1.8em Arial, Verdana, sans-serif;
 	color:  #e7510f;
@@ -204,64 +152,5 @@ h4 {
 	color:  #e7510f;
 }
 
-.committee {
-	
-	text-align: justify;
-	line-height: 10px;
-	margin-bottom: -15px;
-	overflow: hidden;
-}
 
-.committee .foto {
-	float:left;
-	width:auto;
-	overflow:hidden;
-}
-.committee .description{
-	float: left;
-	width: 300px;
-
-}
-
-
-.committee .title {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #e84e0f;
-	position: relative;
-	left: 10px;
-}
-
-.committee .title a {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #003366;
-	position: relative;
-	left: 10px;
-}
-
-
-.committee .title a:hover {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #333;
-	position: relative;
-	left: 10px;
-}
-.committee a {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #003366;
-	text-decoration: none;
-}
-.committee a:hover {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #333;
-	text-decoration: underline;
-}
-
-.committee .descri {
-	font: 1.2em Arial, Verdana, Sans-serif;
-	color: #444;
-	position: relative;
-	left: 10px;
-	overflow:visible;
-	width: 350px;
-}
 
